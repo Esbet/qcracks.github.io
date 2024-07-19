@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const userInfo = getCookie('user_info');
 
     if (userInfo) {
-        const user = JSON.parse(userInfo);
+        const user = JSON.parse(decodeURIComponent(userInfo));
         const userInfoDiv = document.getElementById('user-info');
 
         const userHtml = `
