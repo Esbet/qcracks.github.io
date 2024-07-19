@@ -17,23 +17,33 @@ document.addEventListener('DOMContentLoaded', function () {
         const provider = new firebase.auth.GoogleAuthProvider();
         firebase.auth().signInWithPopup(provider)
             .then((result) => {
-                // Obtén el token de identificación
-                result.user.getIdToken().then((idToken) => {
-                    // Información del usuario
-                    const user = result.user;
-                    const userInfo = {
-                        displayName: user.displayName,
-                        email: user.email,
-                        photoURL: user.photoURL
-                    };
-                    alert("token", result.user)
-                    // Crea la cookie con el token de identificación
-                    document.cookie = "id_token=" + idToken + ";path=/";
-                    document.cookie = "user_info=" + JSON.stringify(userInfo) + ";path=/";
 
-                    // // Redirecciona a home.html
-                    window.location.href = "/pages/home.html";
-                });
+                const user = result.user;
+                const emailDomain = user.email.split('@')[1];
+
+                if (emailDomain === 'quind.io') {
+
+                    // Obtén el token de identificación
+                    user.getIdToken().then((idToken) => {
+                        // Información del usuario
+                       
+                        const userInfo = {
+                            displayName: user.displayName,
+                            email: user.email,
+                            photoURL: user.photoURL
+                        };
+                        alert("token", result.user)
+                        // Crea la cookie con el token de identificación
+                        document.cookie = "id_token=" + idToken + ";path=/";
+                        document.cookie = "user_info=" + JSON.stringify(userInfo) + ";path=/";
+
+                        // // Redirecciona a home.html
+                        window.location.href = "/pages/home.html";
+                    });
+                } else {
+                    alert('No tienes acceso para ingresar.');
+                    firebase.auth().signOut();
+                }
             })
             .catch((error) => {
                 console.error('Error during sign in:', error);
