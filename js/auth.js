@@ -32,7 +32,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     document.cookie = "user_info=" + JSON.stringify(userInfo) + ";path=/";
 
                     // // Redirecciona a home.html
-                    window.location.href = "home.html";
+                    window.location.href = "/pages/home.html";
                 });
             })
             .catch((error) => {
