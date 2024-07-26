@@ -25,18 +25,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
                     // Obtén el token de identificación
                     user.getIdToken().then((idToken) => {
-                        // Información del usuario
-                       
-                        const userInfo = {
-                            displayName: user.displayName,
-                            email: user.email,
-                            photoURL: user.photoURL
-                        };
-                        alert("token", result.user)
+         
                         // Crea la cookie con el token de identificación
                         document.cookie = "id_token=" + idToken + ";path=/";
-                        document.cookie = "user_info=" + JSON.stringify(userInfo) + ";path=/";
-
+                    
                         // // Redirecciona a home.html
                         window.location.href = "/pages/home.html";
                     });
